@@ -16,19 +16,19 @@ public static void main(String[] args) {
 
     public static void getD4() {
 
-        int D4 = (int) (Math.random()*4)+1;
+        D4 = (int) (Math.random()*4)+1;
         System.out.println(D4);
     }
 
     public static void getD6() {
 
-        int D6 = (int) (Math.random()*6)+1;
-        System.out.println(D4);
+        D6 = (int) (Math.random()*6)+1;
+        System.out.println(D6);
     }
 
     public static void getD20() {
 
-        int D20 = (int) (Math.random()*20)+1;
+        D20 = (int) (Math.random()*20)+1;
         System.out.println(D20);
     }
 
