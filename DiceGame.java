@@ -3,14 +3,30 @@ class DiceGame {
     static int D4roll;
     static int D6roll;
     static int D20roll;
-
+    static int D4total;
+    static int D6total;
+    static int D20total;
+    static int D4average;
+    static int D6average;
+    static int D20average;
+    static int rollnumber=0;
 
 public static void main(String[] args) {
 
-        D4roll = getD4();
-        D6roll = getD6();
-        D20roll = getD20();
-        reportNumbers();
+        
+        for(int i=1; i<=20; i++) {
+            rollnumber++;
+            D4roll = getD4();                   //calculate random numbers
+            D6roll = getD6();
+            D20roll = getD20();
+            D4total=D4total+D4roll;             //add up sum of all rolls
+            D6total=D6total+D6roll;
+            D20total=D20total+D20roll;
+            D4average=D4total/rollnumber;
+            
+            System.out.print(rollnumber);                //print out roll number and values
+            reportNumbers();
+        }
 
     }
 
@@ -34,7 +50,9 @@ public static void main(String[] args) {
 
     public static void reportNumbers() {
         
-        System.out.println("\tD4:"+D4roll +"\tD6:"+D6roll+"\tD20:"+D20roll);
+        System.out.println("\tRoll:\tD4:"+D4roll +"\tD6:"+D6roll+"\tD20:"+D20roll);
+        System.out.println("\tTotal:\tD4:"+D4total+"\tD6:"+D6total+"\tD20:"+D20total);
+        System.out.println("    ");
     }
 
 
