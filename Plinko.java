@@ -7,11 +7,15 @@ class Plinko
     public static final int TERMINATE = 3;
 
     public static final int[] VALUES = {1, 3, 2, 0, 5, 0, 2, 3, 1};
+    public static int[] slotPoints =   {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    public static int[] slotHits =     {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     public static int mode = -1;
     public static int startingPosition = -1;
     public static int discPosition = -1;
     public static int numDiscs = 1;
+    public static int finalPoints = 0;
+    public static int finalPosition=-1;
 
     public static void main(String[] args) 
     {
@@ -29,6 +33,7 @@ class Plinko
                 if(mode == SINGLE_DISC) 
                 {
                     isMultiDisc = false;
+                    numDiscs=1;
                 }
                 else if(mode == MULTI_DISC) 
                 {
@@ -51,34 +56,52 @@ class Plinko
 
     public static void runPlinko(Boolean isMultiDisc)
     {
-        discPosition = startingPosition;
-        for(int i=0; i<=12; i++)
+        for (int dropNumber=0; dropNumber<numDiscs; dropNumber++)
         {
-            if (!isMultiDisc)
+            discPosition = startingPosition;
+            for(int i=0; i<12; i++)
             {
-                System.out.print(discPosition+"\t");
-                if (isEven(i))
+                if (!isMultiDisc)
                 {
-                    printEvenRow(discPosition);
-                    
-                } 
-                else 
-                {
-                    printOddRow(discPosition);
-                }
+                    System.out.print(discPosition+"\t");
+                    if (isEven(i))
+                    {
+                        printEvenRow(discPosition);
+                    } 
+                    else 
+                    {
+                        printOddRow(discPosition);
+                    }
                 
+                }
+                int moveRightChance = (int) (Math.random()*2);
+                if (discPosition==0) discPosition++;
+                else if (discPosition==16) discPosition--;
+                else if (moveRightChance==1) discPosition++;
+                else if (moveRightChance==0) discPosition--;
             }
-            
-            int moveRightChance = (int) (Math.random()*2);
-            if (discPosition==0) discPosition++;
-            else if (discPosition==16) discPosition--;
-            else if (moveRightChance==1) discPosition++;
-            else if (moveRightChance==0) discPosition--;
+            System.out.println("position:" +discPosition);
+            finalPosition = discPosition/2;
+            System.out.println("final:" +finalPosition);
+            slotHits[finalPosition]++;
+            slotPoints[finalPosition] += VALUES[finalPosition];
+            finalPoints+=VALUES[finalPosition];
         }
-        int finalPosition = discPosition/2;
-        System.out.print("\n");
-        System.out.println("Your disk landed in position "+finalPosition+" and you won "+VALUES[finalPosition]+" points!");
-        System.out.print("\n");
+            System.out.print("\n");
+            if (isMultiDisc)
+            {
+                for(int i=0; i<=8; i++)
+                {
+                    System.out.println("Position "+i+"\tHits: "+slotHits[i]+"    \tPoints: "+slotPoints[i]);
+                }
+                System.out.println("Final points: "+finalPoints);
+            }
+            else
+            {
+                System.out.println("Your disk landed in position "+finalPosition+" and you won "+VALUES[finalPosition]+" points!");
+            }
+            System.out.print("\n");
+            clearResults();
     }
 
     public static void printOddRow(int discPosition) 
@@ -160,5 +183,16 @@ class Plinko
             + "\t(2) Multiple discs\n"
             + "\t(3) Quit\n"
         );
+    }
+
+
+    public static void clearResults()
+    {
+        finalPoints=0;
+        for(int i=0; i<=8; i++)
+        {
+            slotHits[i]=0;
+            slotPoints[i]=0;
+        }
     }
 }
