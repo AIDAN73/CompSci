@@ -63,7 +63,7 @@ class Plinko
             {
                 if (!isMultiDisc)
                 {
-                    System.out.print(discPosition+"\t");
+                    
                     if (isEven(i))
                     {
                         printEvenRow(discPosition);
@@ -72,6 +72,7 @@ class Plinko
                     {
                         printOddRow(discPosition);
                     }
+
                 
                 }
                 int moveRightChance = (int) (Math.random()*2);
@@ -80,9 +81,8 @@ class Plinko
                 else if (moveRightChance==1) discPosition++;
                 else if (moveRightChance==0) discPosition--;
             }
-            System.out.println("position:" +discPosition);
             finalPosition = discPosition/2;
-            System.out.println("final:" +finalPosition);
+            
             slotHits[finalPosition]++;
             slotPoints[finalPosition] += VALUES[finalPosition];
             finalPoints+=VALUES[finalPosition];
@@ -92,7 +92,7 @@ class Plinko
             {
                 for(int i=0; i<=8; i++)
                 {
-                    System.out.println("Position "+i+"\tHits: "+slotHits[i]+"    \tPoints: "+slotPoints[i]);
+                    System.out.println("Position "+i+"\tHits: "+slotHits[i]+"       \tPoints: "+slotPoints[i]);
                 }
                 System.out.println("Final points: "+finalPoints);
             }
@@ -107,6 +107,7 @@ class Plinko
     public static void printOddRow(int discPosition) 
     {
         //Print the visualization of an odd numbered row with the disc in the provided position.
+        System.out.print("\t");
         for(int i=0; i<=16; i++)
         {
             if (i==discPosition) System.out.print("O");
@@ -115,13 +116,14 @@ class Plinko
 
             else System.out.print(" ");
         }
-
-        System.out.println("\tOdd");
+        System.out.print("\n");
+        
     }
 
     public static void printEvenRow(int discPosition)
     {
         //Print the visualization of an even numbered row with the disc in the provided position.
+        System.out.print("\t");
         for(int i=0; i<=16; i++)
         {
             if (i==discPosition) System.out.print("O");
@@ -130,7 +132,8 @@ class Plinko
 
             else System.out.print(".");
         }
-        System.out.println("\tEven");
+        System.out.print("\n");
+        
     }
 
     public static void collectSettings(Boolean isMultiDisc)
