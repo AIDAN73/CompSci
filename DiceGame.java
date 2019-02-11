@@ -13,6 +13,10 @@ class DiceGame {
 
 public static void main(String[] args) {
 
+
+    double result = (double) 13-3*6/4%3;
+    System.out.println("result: " + result);
+
         
         for(int i=1; i<=20; i++) {
             rollnumber++;
